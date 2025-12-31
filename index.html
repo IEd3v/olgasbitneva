@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Флорист Ольга Леонидовна Сбитнева | Авторские букеты</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --yellow: #FFD166;
+            --light-beige: #F8F4E9;
+            --beige: #E8DCC6;
+            --dark-beige: #D4C5A2;
+            --text-dark: #5A4C3A;
+            --text-light: #8A7B69;
+        }
+        
+        body {
+            background-color: var(--light-beige);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Шапка с фото и именем */
+        .header {
+            background: linear-gradient(135deg, var(--beige) 0%, var(--light-beige) 100%);
+            padding: 30px 0;
+            text-align: center;
+            border-bottom: 3px solid var(--yellow);
+        }
+        
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 6px solid var(--yellow);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .name {
+            font-size: 2.8rem;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+        
+        .profession {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            font-weight: 300;
+            letter-spacing: 3px;
+        }
+        
+        /* Галерея работ */
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin: 50px 0 30px;
+            color: var(--text-dark);
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--yellow);
+        }
+        
+        .gallery-container {
+            position: relative;
+            max-width: 100%;
+            margin: 0 auto 60px;
+            padding: 0 50px;
+        }
+        
+        .gallery {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            gap: 20px;
+            padding: 20px 10px;
+            scrollbar-width: none; /* Для Firefox */
+        }
+        
+        .gallery::-webkit-scrollbar {
+            display: none; /* Для Chrome, Safari, Opera */
+        }
+        
+        .gallery-item {
+            flex: 0 0 auto;
+            width: 280px;
+            height: 350px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .scroll-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background-color: var(--yellow);
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .scroll-btn:hover {
+            background-color: var(--dark-beige);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .scroll-btn.left {
+            left: 0;
+        }
+        
+        .scroll-btn.right {
+            right: 0;
+        }
+        
+        /* О себе */
+        .about-section {
+            background-color: white;
+            padding: 60px 0;
+            margin: 40px 0;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+        }
+        
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+        
+        .about-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--text-light);
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+        
+        .about-text i {
+            color: var(--yellow);
+            margin-right: 10px;
+        }
+        
+        /* Кнопка заказа */
+        .order-section {
+            text-align: center;
+            padding: 60px 0;
+            background: linear-gradient(135deg, var(--beige) 0%, var(--light-beige) 100%);
+            border-radius: 15px;
+            margin: 40px 0 60px;
+        }
+        
+        .order-title {
+            font-size: 2rem;
+            margin-bottom: 25px;
+            color: var(--text-dark);
+        }
+        
+        .order-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #27A7E7; /* Цвет Telegram */
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 600;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 15px rgba(39, 167, 231, 0.3);
+        }
+        
+        .order-btn:hover {
+            background-color: #1E8BC3;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(39, 167, 231, 0.4);
+        }
+        
+        .order-btn i {
+            margin-right: 12px;
+            font-size: 1.5rem;
+        }
+        
+        /* Футер */
+        .footer {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid var(--beige);
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .name {
+                font-size: 2.2rem;
+            }
+            
+            .profession {
+                font-size: 1.1rem;
+            }
+            
+            .gallery-container {
+                padding: 0 20px;
+            }
+            
+            .scroll-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .order-title {
+                font-size: 1.6rem;
+            }
+            
+            .order-btn {
+                font-size: 1.1rem;
+                padding: 15px 30px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .profile-img {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .name {
+                font-size: 1.8rem;
+            }
+            
+            .gallery-item {
+                width: 240px;
+                height: 300px;
+            }
+            
+            .about-text {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка с фото и именем -->
+    <header class="header">
+        <div class="container">
+            <img src="images/photo.jpg" alt="Ольга Леонидовна Сбитнева" class="profile-img">
+            <h1 class="name">Ольга Леонидовна Сбитнева</h1>
+            <p class="profession">ПРОФЕССИОНАЛЬНЫЙ ФЛОРИСТ</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- Галерея работ -->
+        <h2 class="section-title">Мои работы</h2>
+        <div class="gallery-container">
+            <button class="scroll-btn left" id="scrollLeft">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="gallery" id="gallery">
+                <div class="gallery-item">
+                    <img src="images/p1.png" alt="Букет невесты">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/p3.png" alt="Розовые розы">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/p4.png" alt="Осенний букет">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/p5.png" alt="Свадебная композиция">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/p6.png" alt="Букет тюльпанов">
+                </div>
+            </div>
+            <button class="scroll-btn right" id="scrollRight">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+        
+        <!-- О себе -->
+        <div class="about-section">
+            <h2 class="section-title">Обо мне</h2>
+            <div class="about-content">
+                <p class="about-text">
+                    <i class="fas fa-seedling"></i>Добро пожаловать в мой цветочный мир! Меня зовут Ольга Леонидовна Сбитнева, и я профессиональный флорист с более чем 5-летним опытом создания красивых и уникальных цветочных композиций.
+                </p>
+                <p class="about-text">
+                    <i class="fas fa-hand-sparkles"></i>Я верю, что цветы могут сделать жизнь ярче и счастливее, и с радостью помогу вам подобрать идеальную цветочную композицию для любого случая - будь то признание в любви, поздравление с праздником или украшение важного события.
+                </p>
+            </div>
+        </div>
+        
+        <!-- Кнопка заказа -->
+        <div class="order-section">
+            <h2 class="order-title">Заказать букет или консультацию</h2>
+            <a href="https://t.me/SirOEdbuket" class="order-btn" target="_blank">
+                <i class="fab fa-telegram-plane"></i> Написать в Telegram
+            </a>
+            <p style="margin-top: 20px; color: var(--text-light); font-size: 1.1rem;">
+                Отвечу в течение 1-2 часов в рабочее время
+            </p>
+        </div>
+    </div>
+    
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="container">
+            <p>Ольга Леонидовна Сбитнева &copy; <span id="currentYear"></span>. Все права защищены.</p>
+            <p>Профессиональная флористика. Авторские букеты и композиции.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Установка текущего года в футере
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
+        // Прокрутка галереи
+        const gallery = document.getElementById('gallery');
+        const scrollLeftBtn = document.getElementById('scrollLeft');
+        const scrollRightBtn = document.getElementById('scrollRight');
+        
+        scrollLeftBtn.addEventListener('click', () => {
+            gallery.scrollBy({ left: -300, behavior: 'smooth' });
+        });
+        
+        scrollRightBtn.addEventListener('click', () => {
+            gallery.scrollBy({ left: 300, behavior: 'smooth' });
+        });
+        
+        // Автоматическая прокрутка галереи каждые 5 секунд
+        setInterval(() => {
+            if (gallery.scrollLeft + gallery.clientWidth >= gallery.scrollWidth - 10) {
+                gallery.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+                gallery.scrollBy({ left: 300, behavior: 'smooth' });
+            }
+        }, 5000);
+        
+        // Добавление эффекта при наведении на элементы галереи
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        galleryItems.forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.03)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
